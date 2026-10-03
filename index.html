@@ -55,6 +55,54 @@ nav a:hover,nav a:focus-visible{color:var(--ink);border-bottom-color:var(--teal)
 .calc fieldset[data-for]{display:none}
 .calc fieldset[data-for].on{display:block}
 .calc-out{position:sticky;top:96px}
+.req fieldset{border:0;padding:0;margin:0 0 20px}
+.req legend{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--grey);padding:0;margin-bottom:6px}
+.req .hint{letter-spacing:0;text-transform:none;font-size:12px;color:var(--grey)}
+.req fieldset[data-for]{display:none}
+.req fieldset[data-for].on{display:block;animation:unfold .4s cubic-bezier(.2,.8,.3,1)}
+@keyframes unfold{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+.req button.step2,.req p.step2{display:none}
+.req.ready button.step2{display:block;animation:unfold .4s cubic-bezier(.2,.8,.3,1) .05s both}
+.req.ready p.step2{animation:unfold .4s cubic-bezier(.2,.8,.3,1) .1s both}
+.req label.r,.req label.c,.req label.n{display:block;font-size:15px;letter-spacing:0;text-transform:none;color:var(--ink);padding:9px 0;border-top:.5px solid var(--line);margin:0;cursor:pointer}
+.req fieldset label.r:last-of-type,.req fieldset label.c:last-of-type,.req fieldset label.n:last-of-type{border-bottom:.5px solid var(--line)}
+.req input[type=radio],.req input[type=checkbox]{accent-color:var(--teal);margin-right:10px;width:auto;display:inline-block;margin-top:0;padding:0;border:0}
+.req input[type=number]{width:68px;display:inline-block;margin:0 10px 0 0;padding:6px 8px;vertical-align:middle}
+.prog{display:flex;align-items:center;gap:12px;margin-bottom:18px}
+.prog-bar{flex:1;height:3px;background:var(--line);overflow:hidden}
+.prog-bar i{display:block;height:100%;width:0;background:var(--teal);transition:width .35s cubic-bezier(.4,0,.2,1)}
+.prog span{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--grey);white-space:nowrap;transition:color .3s}
+.prog.done span{color:var(--teal)}
+.req label{position:relative}
+.req .ok-mark{position:absolute;right:10px;top:31px;width:16px;height:16px;opacity:0;transform:scale(.6);transition:opacity .25s,transform .25s;pointer-events:none}
+.req label.filled .ok-mark{opacity:1;transform:scale(1)}
+.req input.filled,.req select.filled,.req textarea.filled{border-color:var(--teal)}
+#req-send{transition:transform .2s,opacity .25s;opacity:.55}
+#req-send.ready{opacity:1}
+#req-send.ready:hover{transform:translateY(-1px)}
+.req-ok.on{animation:popin .45s cubic-bezier(.2,.8,.3,1)}
+@keyframes popin{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.fsteps{list-style:none;margin:28px 0 0;padding:0;counter-reset:f}
+.fsteps li{display:grid;grid-template-columns:34px 1fr;gap:14px;padding:14px 0;border-top:.5px solid var(--line);align-items:start}
+.fsteps li:last-child{border-bottom:.5px solid var(--line)}
+.fsteps span{width:28px;height:30px;display:flex;align-items:center;justify-content:center;background:var(--teal);opacity:.85;color:#fff;font-size:13px;clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%)}
+.fsteps b{display:block;font-size:15px;font-weight:600;margin-bottom:2px}
+.fsteps div{font-size:14px;color:var(--grey)}
+.req select{display:block;width:100%;margin-top:5px;padding:9px 10px;border:.5px solid var(--line);background:#fff;font:inherit;font-size:15px;color:var(--ink);border-radius:0;appearance:none}
+.req select:focus{outline:none;border-color:var(--teal)}
+.req select.err{border-color:#CF124F}
+.req{display:none;margin-top:18px;border-top:.5px solid var(--line);padding-top:16px}
+.req.on{display:block;margin-top:0;border-top:0;padding-top:0}
+.req-h{font-size:14px;margin:0 0 12px;color:var(--ink)}
+.req label{display:block;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--grey);margin-bottom:10px}
+.req .pf{letter-spacing:0;text-transform:none;font-size:11px;color:var(--teal)}
+.req input,.req textarea{display:block;width:100%;margin-top:5px;transition:border-color .2s;padding:9px 10px;border:.5px solid var(--line);background:#fff;font:inherit;font-size:15px;color:var(--ink);border-radius:0}
+.req input:focus,.req textarea:focus{outline:none;border-color:var(--teal)}
+.req input.err{border-color:#CF124F}
+.req2{display:grid;grid-template-columns:1fr 1fr;gap:0 12px}
+.req-ok{display:none;margin:18px 0 0;padding:14px;border-left:3px solid var(--teal);background:#fafafa;font-size:15px}
+.req-ok.on{display:block}
+@media (max-width:600px){.req2{grid-template-columns:1fr}}
 .calc-box{background:#fff;border:.5px solid var(--line);padding:32px;box-shadow:0 18px 40px -30px rgba(29,29,27,.35)}
 .calc-label{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--grey)}
 .calc-sum{font-family:"Clear Sans Thin",sans-serif;font-weight:200;font-size:64px;line-height:1;margin:10px 0 4px}
@@ -374,7 +422,7 @@ figcaption strong{color:var(--teal);font-weight:600}
 {"@context":"https://schema.org","@type":"ProfessionalService","@id":"https://www.hege-nuernberg.de/#hege","name":"HeGe Vermessung & WEG","alternateName":"HeGe Nürnberg","url":"https://www.hege-nuernberg.de/","telephone":"+49 911 64377842","email":"verwaltung@hege-nuernberg.de","founder":{"@type":"Person","name":"Elias Athanasios Roth"},"address":{"@type":"PostalAddress","streetAddress":"Würzburger Straße 4","postalCode":"90762","addressLocality":"Fürth","addressRegion":"Bayern","addressCountry":"DE"},"areaServed":[{"@type":"City","name":"Fürth"},{"@type":"City","name":"Nürnberg"},{"@type":"City","name":"Erlangen"}],"openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday"],"opens":"09:00","closes":"18:00"},{"@type":"OpeningHoursSpecification","dayOfWeek":"Friday","opens":"09:00","closes":"14:00"}],"description":"Aufmaß per Laserscan, Grundrisse im CAD, Wohn- und Nutzflächen nach WoFlV und DIN 277, Kubatur, Aufteilungspläne und Abgeschlossenheitsbescheinigung nach WEG. Festpreis, Architektenstempel, Lieferung in 8 Werktagen. Großraum Nürnberg, Fürth, Erlangen.","hasOfferCatalog":{"@type":"OfferCatalog","name":"Leistungen","itemListElement":[{"@type":"Offer","itemOffered":{"@type":"Service","name":"Aufmaß und Grundriss einer Eigentumswohnung"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Wohnflächenberechnung nach WoFlV"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Aufteilungsplan und Abgeschlossenheitsbescheinigung nach § 7 WEG"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Bestandspläne, Schnitte und Ansichten für Architekten"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Kubatur nach DIN 277"}}]}}
 </script>
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Was kostet ein Aufmaß mit Grundriss und Wohnflächenberechnung für eine Eigentumswohnung?","acceptedAnswer":{"@type":"Answer","text":"Bei HeGe kostet das Komplettpaket aus Aufmaß, Grundriss und Wohnflächenberechnung nach WoFlV für eine Eigentumswohnung 874,65 € inkl. 19 % USt. (735 € netto). Der Festpreis steht vor dem Termin fest."}},{"@type":"Question","name":"Wie lange dauert es bis zur fertigen Wohnflächenberechnung?","acceptedAnswer":{"@type":"Answer","text":"Alle Unterlagen sind innerhalb von 8 Werktagen nach dem Aufmaß fertig und tragen den Architektenstempel."}},{"@type":"Question","name":"Muss die Wohnung für das Aufmaß leer sein?","acceptedAnswer":{"@type":"Answer","text":"Nein. Möblierte Räume werden genauso gemessen. Es genügt der Zugang zur Wohnung."}},{"@type":"Question","name":"Erkennt die Bank die Wohnflächenberechnung an?","acceptedAnswer":{"@type":"Answer","text":"Die Berechnung erfolgt nach WoFlV, ist unterschrieben und wird von Banken, Notaren und der Bauaufsicht akzeptiert."}},{"@type":"Question","name":"Wo ist HeGe tätig?","acceptedAnswer":{"@type":"Answer","text":"Im Großraum Nürnberg, Fürth und Erlangen, rund 50 km um Fürth. Anfahrt bis 20 km ist im Preis enthalten."}},{"@type":"Question","name":"Wer erstellt den Aufteilungsplan für die Teilung nach WEG?","acceptedAnswer":{"@type":"Answer","text":"HeGe erstellt den Aufteilungsplan nach § 7 Abs. 4 WEG, berechnet die Miteigentumsanteile in Tausendstel und stellt den Antrag auf Abgeschlossenheitsbescheinigung bei der Bauaufsicht."}}]}
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Was kostet ein Aufmaß mit Grundriss und Wohnflächenberechnung für eine Eigentumswohnung?","acceptedAnswer":{"@type":"Answer","text":"Den Festpreis nennt HeGe vor dem Termin, abhängig von Objektart und Größe. Nach einer Anfrage über die Website erfolgt der Rückruf innerhalb von 24 Stunden."}},{"@type":"Question","name":"Wonach richtet sich der Preis?","acceptedAnswer":{"@type":"Answer","text":"Nach Objektart und Größe: bei Wohnungen nach der Einheit, bei Häusern nach der Zahl der Etagen einschließlich Keller und Dachgeschoss, bei Mehrfamilienhäusern nach der Zahl der Nutzungseinheiten. Dazu kommen Zusatzleistungen wie Schnitt, Ansichten oder Kubatur."}},{"@type":"Question","name":"Ist der Preis ein Festpreis?","acceptedAnswer":{"@type":"Answer","text":"Ja. Der Preis steht schriftlich vor dem Aufmaß fest und wird so abgerechnet, ohne Stundenzettel und ohne Nachträge."}},{"@type":"Question","name":"Kommen Anfahrtskosten dazu?","acceptedAnswer":{"@type":"Answer","text":"Bis 20 km einfache Entfernung ab Fürth ist die Anfahrt enthalten. Darüber hinaus wird eine Kilometerpauschale berechnet, die im Angebot ausgewiesen ist."}},{"@type":"Question","name":"Was ist im Preis enthalten?","acceptedAnswer":{"@type":"Answer","text":"Aufmaß vor Ort, Zeichnung im CAD, Berechnung nach WoFlV und Lieferung als PDF, auf Wunsch zusätzlich als DWG. Alle Unterlagen tragen den Architektenstempel."}},{"@type":"Question","name":"Was passiert, wenn der Bank etwas fehlt?","acceptedAnswer":{"@type":"Answer","text":"HeGe klärt das direkt mit der Bank und liefert nach. Die Unterlagen sind erst fertig, wenn die Finanzierung damit arbeiten kann."}},{"@type":"Question","name":"Wie lange dauert es bis zur fertigen Wohnflächenberechnung?","acceptedAnswer":{"@type":"Answer","text":"Alle Unterlagen sind innerhalb von 8 Werktagen nach dem Aufmaß fertig und tragen den Architektenstempel."}},{"@type":"Question","name":"Muss die Wohnung für das Aufmaß leer sein?","acceptedAnswer":{"@type":"Answer","text":"Nein. Möblierte Räume werden genauso gemessen. Es genügt der Zugang zur Wohnung."}},{"@type":"Question","name":"Erkennt die Bank die Wohnflächenberechnung an?","acceptedAnswer":{"@type":"Answer","text":"Ja. Die Berechnung nach WoFlV trägt Unterschrift und Architektenstempel und wird von Banken, Notaren und der Bauaufsicht akzeptiert. Fordert die Bank eine Ergänzung, liefert HeGe sie ohne weitere Kosten nach."}},{"@type":"Question","name":"Wo ist HeGe tätig?","acceptedAnswer":{"@type":"Answer","text":"Im Großraum Nürnberg, Fürth und Erlangen, rund 50 km um Fürth. Anfahrt bis 20 km ist im Preis enthalten."}},{"@type":"Question","name":"Wer erstellt den Aufteilungsplan für die Teilung nach WEG?","acceptedAnswer":{"@type":"Answer","text":"HeGe erstellt den Aufteilungsplan nach § 7 Abs. 4 WEG, berechnet die Miteigentumsanteile in Tausendstel und stellt den Antrag auf Abgeschlossenheitsbescheinigung bei der Bauaufsicht."}}]}
 </script>
 </head>
 <body>
@@ -388,7 +436,7 @@ figcaption strong{color:var(--teal);font-weight:600}
   </div>
   <nav id="nav" class="nav2">
     <a href="#vermessung">Vermessung</a>
-    <a href="#preise">Preise</a>
+    <a href="#preise">Angebot</a>
     <a href="#objekte">Objekte</a>
     <a href="#weg">Aufteilung</a>
     <a href="#partner">Partner</a>
@@ -407,7 +455,7 @@ figcaption strong{color:var(--teal);font-weight:600}
   <div class="cover-text">
     <p class="pre" style="text-align:center">Vermessung &middot; Unterlagen &middot; WEG</p>
     <h1>Wir messen auf – damit jeder Zentimeter passt.</h1>
-    <p class="lede">Aufmaß, Grundrisse und Wohnflächen nach WoFlV für Bestandsimmobilien im Großraum Nürnberg, Fürth und Erlangen. Mit Architektenstempel, in 8 Werktagen, zum Festpreis.</p>
+    <p class="lede">Aufmaß, Grundrisse und Wohnflächen nach WoFlV für Bestandsimmobilien im Großraum Nürnberg, Fürth und Erlangen. <strong>Unsere Unterlagen gehen bei der Bank durch</strong> – Mit Architektenstempel, in 8 Werktagen, zum Festpreis.</p>
     <div class="actions" style="justify-content:center;gap:16px">
       <a class="btn solid" href="#preise" style="font-size:17px;padding:16px 28px">Was kostet mein Gebäude?</a>
       <a class="btn" href="#partner" style="font-size:17px;padding:16px 28px">HeGe Partner werden</a>
@@ -418,10 +466,10 @@ figcaption strong{color:var(--teal);font-weight:600}
 
 
 <div class="facts"><div class="wrap">
-  <div class="fact"><b><span class="count" data-to="228">0</span></b><span>vermessene Objekte</span></div>
+  <div class="fact"><b><span class="count" data-start="378" data-from="2026-10-03" data-per-week="5">378</span></b><span>vermessene Objekte</span></div>
   <div class="fact"><b>+/- 2 mm</b><span>Messgenauigkeit im Bestand</span></div>
   <div class="fact"><b>8 Werktage</b><span>Lieferung mit Architektenstempel</span></div>
-  <div class="fact"><b>Anerkannt</b><span>bei Banken, Notaren und Bauaufsicht</span></div>
+  <div class="fact"><b>Bankf&auml;hig</b><span>akzeptiert von Banken, Notaren und Bauaufsicht</span></div>
 </div></div>
 
 <div class="divider" id="vermessung" aria-hidden="true"></div>
@@ -429,7 +477,7 @@ figcaption strong{color:var(--teal);font-weight:600}
 <section class="section" style="border-top:.5px solid var(--line)">
   <div class="wrap">
     <h2 style="color:var(--teal);text-align:center">Keine Unterlagen? HeGe – die Lösung.</h2>
-    <p style="margin:14px auto 0;text-align:center;max-width:36em">Was fehlt, schaffen wir. Präzise Zeichnungen. Belastbare Flächen.</p>
+    <p style="margin:14px auto 0;text-align:center;max-width:42em">Was fehlt, schaffen wir. Präzise Zeichnungen. Belastbare Flächen. <strong>Wir stehen für jede Zahl gerade, die unseren Stempel trägt.</strong></p>
     <div class="docs">
       <figure><img src="img/objekte/wohnung_grundriss.jpg" alt="Grundriss einer Eigentumswohnung im CAD gezeichnet, mit Raumbezeichnungen und Flächen" loading="lazy"><figcaption>Grundriss</figcaption></figure>
       <figure><img src="img/objekte/berechnung_2.jpg" alt="Wohnflächenberechnung nach WoFlV, Aufstellung nach Räumen mit Unterschrift" loading="lazy"><figcaption>Wohnflächenberechnung</figcaption></figure>
@@ -462,78 +510,97 @@ figcaption strong{color:var(--teal);font-weight:600}
 <section class="section" id="preise" style="background:#fafafa;border-top:.5px solid var(--line);border-bottom:.5px solid var(--line)">
   <div class="wrap two" style="align-items:start">
     <div>
-      <h2>Was kostet mein Geb&auml;ude?</h2>
-      <p style="margin-top:14px">F&uuml;r Privatpersonen: Objekt w&auml;hlen, Optionen ankreuzen, Preis sehen. Festpreis vor dem Termin &ndash; das Angebot best&auml;tigt genau diese Summe.</p>
-      <form class="calc" id="calc" onsubmit="return false">
-        <fieldset>
-          <legend>Objekt</legend>
-          <label><input type="radio" name="obj" value="woh" checked> Eigentumswohnung</label>
-          <label><input type="radio" name="obj" value="efh"> Einfamilienhaus</label>
-          <label><input type="radio" name="obj" value="mfh"> Mehrfamilienhaus</label>
-        </fieldset>
-        <fieldset data-for="woh">
-          <legend>Leistung</legend>
-          <label><input type="radio" name="wohpaket" value="voll" checked> Aufma&szlig;, Grundriss und Wohnfl&auml;che nach WoFlV</label>
-          <label><input type="radio" name="wohpaket" value="ohne"> Aufma&szlig; und Wohnfl&auml;che ohne Grundriss</label>
-        </fieldset>
-        <fieldset data-for="efh">
-          <legend>Leistung</legend>
-          <label><input type="radio" name="efhpaket" value="voll" checked> Aufma&szlig;, Grundrisse und Wohnfl&auml;che nach WoFlV</label>
-          <label><input type="radio" name="efhpaket" value="ohne"> Aufma&szlig; und Wohnfl&auml;che ohne Grundrisse</label>
-        </fieldset>
-        <fieldset data-for="efh">
-          <legend>Etagen <span class="hint">(Keller und Dachgeschoss z&auml;hlen mit)</span></legend>
-          <label class="num"><input type="number" name="etagen" min="1" max="6" value="3"> Etagen</label>
-          <label><input type="checkbox" name="schnitt_efh"> Geb&auml;udeschnitt <span class="hint">+ 386,75 &euro;</span></label>
-          <label class="num"><input type="number" name="neben" min="0" max="5" value="0"> Nebenanlagen aufmessen <span class="hint">(Garage, Schuppen) je 124,95 &euro;</span></label>
-        </fieldset>
-        <fieldset data-for="mfh">
-          <legend>Leistung</legend>
-          <label><input type="radio" name="mfhpaket" value="voll" checked> Aufma&szlig;, Grundrisse und Wohnfl&auml;chen je Einheit</label>
-          <label><input type="radio" name="mfhpaket" value="ohne"> Aufma&szlig; und Wohnfl&auml;chen ohne Grundrisse</label>
-        </fieldset>
-        <fieldset data-for="mfh">
-          <legend>Nutzungseinheiten <span class="hint">(Wohnungen, Gewerbe, Keller, Dachgeschoss)</span></legend>
-          <label class="num"><input type="number" name="ne" min="2" max="30" value="4"> Einheiten</label>
-          <label><input type="checkbox" name="schnitt_mfh"> Geb&auml;udeschnitt <span class="hint">+ 142,80 &euro; je Einheit</span></label>
-        </fieldset>
-        <fieldset data-for="efh mfh">
-          <legend>Zus&auml;tzlich</legend>
-          <label class="num"><input type="number" name="ansichten" min="0" max="4" value="0"> Geb&auml;udeansichten <span class="hint">je 279,65 &euro;, inkl. 3D-Nachbau</span></label>
-          <label><input type="checkbox" name="kubatur"> Kubatur, umbauter Raum nach DIN 277 <span class="hint">auf Anfrage</span></label>
-          <label><input type="checkbox" name="lageplan"> Lageplan, unbeglaubigt <span class="hint">+ 95,20 &euro;</span></label>
-        </fieldset>
-        <fieldset>
-          <legend>Versand und Anfahrt <span class="hint">(alle Preise inkl. 19&nbsp;% USt.)</span></legend>
-          <label><input type="checkbox" name="post"> Unterlagen per Post <span class="hint">+ 5,89 &euro;</span></label>
-          <label class="num"><input type="number" name="km" min="0" max="80" value="10"> km einfache Entfernung ab F&uuml;rth <span class="hint">bis 20 km inklusive, dar&uuml;ber 1,99 &euro;/km</span></label>
-        </fieldset>
-      </form>
+      <h2>Was kostet Ihr Geb&auml;ude?</h2>
+      <p style="margin-top:14px">Nennen Sie uns Ihr Objekt. Wir rufen innerhalb von 24&nbsp;Stunden zur&uuml;ck und nennen den Festpreis &ndash; verbindlich, vor dem Termin.</p>
+      <ol class="fsteps">
+        <li><span>1</span><div><b>Objekt nennen</b>Adresse, Objektart, ungef&auml;hre Gr&ouml;&szlig;e</div></li>
+        <li><span>2</span><div><b>R&uuml;ckruf in 24 Stunden</b>Wir kl&auml;ren kurz die Details am Telefon</div></li>
+        <li><span>3</span><div><b>Festpreis und Termin</b>Schriftlich, verbindlich, vor dem Aufma&szlig;</div></li>
+        <li><span>4</span><div><b>Unterlagen in 8 Werktagen</b>Mit Architektenstempel, prüffähig</div></li>
+      </ol>
     </div>
     <div class="calc-out">
       <div class="calc-box">
-        <span class="calc-label">Ihr Festpreis</span>
-        <div class="calc-sum" id="calc-sum">874,65 &euro;</div>
-        <span class="calc-vat">inkl. 19&nbsp;% USt. &middot; netto <span id="calc-netto">735 &euro;</span> &middot; Architektenstempel &middot; 8 Werktage</span>
-        <ul class="calc-lines" id="calc-lines"></ul>
-        <a class="btn solid" id="calc-mail" href="mailto:verwaltung@hege-nuernberg.de?subject=Angebot%20Aufma%C3%9F">Dieses Angebot anfragen</a>
-        <p class="small muted" style="margin:14px 0 0">Alle Unterlagen tragen den Architektenstempel und sind innerhalb von 8 Werktagen nach dem Aufma&szlig; bei Ihnen. <strong style="color:var(--ink)">10&nbsp;% unseres Gewinns aus Ihrem Auftrag gehen an HeGe mit Herz e.V.</strong></p>
-        
+        <span class="calc-label">Angebot anfordern</span>
+        <p class="req-h" style="margin:10px 0 14px;font-size:17px;line-height:1.4">W&auml;hlen Sie Ihr Objekt &ndash; den Rest besprechen wir am Telefon.</p>
+        <div class="prog"><div class="prog-bar"><i id="prog-fill"></i></div><span id="prog-txt">Noch 4 Angaben</span></div>
+        <form class="req on" id="req" onsubmit="return false">
+          <fieldset>
+            <legend>Objekt <span class="pf">Pflicht</span></legend>
+            <label class="r"><input type="radio" name="obj" value="Eigentumswohnung" required> Eigentumswohnung</label>
+            <label class="r"><input type="radio" name="obj" value="Einfamilienhaus"> Einfamilienhaus</label>
+            <label class="r"><input type="radio" name="obj" value="Mehrfamilienhaus"> Mehrfamilienhaus</label>
+          </fieldset>
+
+          <fieldset data-for="Eigentumswohnung Einfamilienhaus Mehrfamilienhaus" class="step2">
+            <legend>Leistung</legend>
+            <label class="r"><input type="radio" name="paket" value="mit Grundriss" checked> Aufma&szlig;, Grundriss und Wohnfl&auml;che nach WoFlV</label>
+            <label class="r"><input type="radio" name="paket" value="ohne Grundriss"> Aufma&szlig; und Wohnfl&auml;che ohne Grundriss</label>
+          </fieldset>
+
+          <fieldset data-for="Einfamilienhaus" class="step2">
+            <legend>Etagen <span class="hint">Keller und Dachgeschoss z&auml;hlen mit</span></legend>
+            <label class="n"><input type="number" name="etagen" min="1" max="6" value="3"> Etagen</label>
+            <label class="n"><input type="number" name="neben" min="0" max="5" value="0"> Nebenanlagen <span class="hint">Garage, Schuppen</span></label>
+          </fieldset>
+
+          <fieldset data-for="Mehrfamilienhaus" class="step2">
+            <legend>Nutzungseinheiten <span class="hint">Wohnungen, Gewerbe, Keller, Dach</span></legend>
+            <label class="n"><input type="number" name="ne" min="2" max="30" value="4"> Einheiten</label>
+          </fieldset>
+
+          <fieldset data-for="Einfamilienhaus Mehrfamilienhaus" class="step2">
+            <legend>Zus&auml;tzlich</legend>
+            <label class="c"><input type="checkbox" name="schnitt"> Geb&auml;udeschnitt</label>
+            <label class="c"><input type="checkbox" name="ansichten"> Geb&auml;udeansichten</label>
+            <label class="c"><input type="checkbox" name="kubatur"> Kubatur nach DIN 277</label>
+            <label class="c"><input type="checkbox" name="lageplan"> Lageplan, unbeglaubigt</label>
+          </fieldset>
+
+          <fieldset class="step2" data-for="Eigentumswohnung Einfamilienhaus Mehrfamilienhaus">
+            <legend>Ihre Angaben</legend>
+            <label>Objektadresse <span class="pf">Pflicht</span>
+              <input type="text" name="objekt" required placeholder="Stra&szlig;e, Hausnummer, PLZ Ort"></label>
+            <label>Name <span class="pf">Pflicht</span>
+              <input type="text" name="name" required placeholder="Vor- und Nachname"></label>
+            <div class="req2">
+              <label>Telefon <span class="pf">Pflicht</span><input type="tel" name="tel" required placeholder="0911 &hellip;"></label>
+              <label>E-Mail<input type="email" name="mail" placeholder="name@beispiel.de"></label>
+            </div>
+            <label>Anmerkung<textarea name="notiz" rows="2" placeholder="Zugang, Wunschtermin, Besonderheiten"></textarea></label>
+          </fieldset>
+
+          <button class="btn solid step2" type="button" id="req-send" style="width:100%;border:0;cursor:pointer;font-family:inherit;margin-top:4px;font-size:16px;padding:15px 10px;background:var(--ink)">R&uuml;ckruf anfordern</button>
+          <p class="small muted step2" style="margin:10px 0 0">Ihre Angaben gehen ausschlie&szlig;lich an HeGe und dienen der Angebotserstellung. Siehe <a href="datenschutz.html">Datenschutz</a>.</p>
+        </form>
+        <p class="req-ok" id="req-ok">Ihre Anfrage ist auf dem Weg. Wir rufen Sie innerhalb von 24&nbsp;Stunden zur&uuml;ck.</p>
+        <p class="small muted" style="margin:14px 0 0;border-top:.5px solid var(--line);padding-top:14px">Lieber direkt sprechen? <a href="tel:+4991164377842" style="color:var(--ink)">0911 643 778 42</a><br><strong style="color:var(--ink)">10&nbsp;% unseres Gewinns aus Ihrem Auftrag gehen an HeGe mit Herz e.V.</strong></p>
       </div>
     </div>
   </div>
 </section>
 
+<div class="marquee" aria-label="Partner, die mit unseren Unterlagen arbeiten">
+  <div class="track logo-track"><img src="img/partner/century21.png" alt="Century 21" loading="lazy"><img src="img/partner/engel-voelkers.png" alt="Engel &amp; Völkers" loading="lazy"><img src="img/partner/remax.png" alt="RE/MAX" loading="lazy"><img src="img/partner/von-poll.png" alt="Von Poll Immobilien" loading="lazy"><img src="img/partner/garant.png" alt="GARANT Immobilien" loading="lazy"><img src="img/partner/schaller.png" alt="Schaller Immobilien" loading="lazy"><img src="img/partner/schrettenbrunner.png" alt="Schrettenbrunner Immobilien" loading="lazy"><img src="img/partner/century21.png" alt="Century 21" loading="lazy"><img src="img/partner/engel-voelkers.png" alt="Engel &amp; Völkers" loading="lazy"><img src="img/partner/remax.png" alt="RE/MAX" loading="lazy"><img src="img/partner/von-poll.png" alt="Von Poll Immobilien" loading="lazy"><img src="img/partner/garant.png" alt="GARANT Immobilien" loading="lazy"><img src="img/partner/schaller.png" alt="Schaller Immobilien" loading="lazy"><img src="img/partner/schrettenbrunner.png" alt="Schrettenbrunner Immobilien" loading="lazy"></div>
+</div>
+
 <section class="section" id="faq" style="padding-top:44px;padding-bottom:44px">
   <div class="wrap" style="max-width:760px">
     <h2 style="font-size:24px">Häufige Fragen</h2>
     <div class="faq" style="margin-top:14px">
-      <details><summary>Was kostet ein Aufmaß mit Grundriss und Wohnflächenberechnung für eine Eigentumswohnung?</summary><p>Das Komplettpaket aus Aufmaß, Grundriss und Wohnflächenberechnung nach WoFlV kostet 874,65 € inkl. 19 % USt. Der Festpreis steht vor dem Termin fest.</p></details>
-      <details><summary>Wie lange dauert es bis zur fertigen Wohnflächenberechnung?</summary><p>Alle Unterlagen sind innerhalb von 8 Werktagen nach dem Aufmaß fertig und tragen den Architektenstempel.</p></details>
-      <details><summary>Muss die Wohnung für das Aufmaß leer sein?</summary><p>Möblierte Räume messen wir genauso. Es genügt der Zugang zur Wohnung.</p></details>
-      <details><summary>Erkennt die Bank die Wohnflächenberechnung an?</summary><p>Die Berechnung erfolgt nach WoFlV, ist unterschrieben und wird von Banken, Notaren und der Bauaufsicht akzeptiert.</p></details>
+      <details><summary>Erkennt die Bank die Wohnflächenberechnung an?</summary><p>Ja. Unsere Berechnung nach WoFlV trägt Unterschrift und Architektenstempel und wird von Banken, Notaren und der Bauaufsicht akzeptiert. Fordert Ihre Bank eine Ergänzung, liefern wir sie nach – ohne weitere Kosten.</p></details>
+      <details><summary>Was passiert, wenn der Bank etwas fehlt?</summary><p>Wir klären das direkt mit der Bank und liefern nach. Unsere Unterlagen sind erst fertig, wenn Ihre Finanzierung damit arbeiten kann.</p></details>
       <details><summary>Wer erstellt den Aufteilungsplan für die Teilung nach WEG?</summary><p>HeGe erstellt den Aufteilungsplan nach § 7 Abs. 4 WEG, berechnet die Miteigentumsanteile in Tausendstel und stellt den Antrag auf Abgeschlossenheitsbescheinigung bei der Bauaufsicht.</p></details>
+      <details><summary>Muss die Wohnung für das Aufmaß leer sein?</summary><p>Möblierte Räume messen wir genauso. Es genügt der Zugang zur Wohnung.</p></details>
+      <details><summary>Wie lange dauert es bis zur fertigen Wohnflächenberechnung?</summary><p>Alle Unterlagen sind innerhalb von 8 Werktagen nach dem Aufmaß fertig und tragen den Architektenstempel.</p></details>
+      <details><summary>Was ist im Preis enthalten?</summary><p>Aufmaß vor Ort, Zeichnung im CAD, die Berechnung nach WoFlV und die Lieferung als PDF – auf Wunsch zusätzlich als DWG. Alle Unterlagen tragen den Architektenstempel.</p></details>
       <details><summary>Wo ist HeGe tätig?</summary><p>Im Großraum Nürnberg, Fürth und Erlangen – rund 50 km um Fürth. Anfahrt bis 20 km ist im Preis enthalten.</p></details>
+      <details><summary>Ist der Preis ein Festpreis?</summary><p>Ja. Sie erhalten den Preis schriftlich vor dem Aufmaß. Was dort steht, wird abgerechnet – ohne Stundenzettel und ohne Nachträge.</p></details>
+      <details><summary>Wonach richtet sich der Preis?</summary><p>Nach Objektart und Größe: bei Wohnungen nach der Einheit, bei Häusern nach der Zahl der Etagen einschließlich Keller und Dachgeschoss, bei Mehrfamilienhäusern nach der Zahl der Nutzungseinheiten. Dazu kommen gewünschte Zusatzleistungen wie Schnitt, Ansichten oder Kubatur.</p></details>
+      <details><summary>Kommen Anfahrtskosten dazu?</summary><p>Bis 20 km einfache Entfernung ab Fürth ist die Anfahrt enthalten. Darüber hinaus berechnen wir eine Kilometerpauschale, die im Angebot ausgewiesen ist.</p></details>
+      <details><summary>Was kostet ein Aufmaß mit Grundriss und Wohnflächenberechnung?</summary><p>Den Festpreis nennen wir Ihnen vor dem Termin, abhängig von Objektart und Größe. Fordern Sie einen Rückruf an – wir melden uns innerhalb von 24 Stunden.</p></details>
+      <details><summary>Gibt es Konditionen für Makler und Verwaltungen?</summary><p>Partner erhalten gesonderte Konditionen über das Portal hege-partner.de. Dort fordern sie Angebote selbst an und buchen Termine selbst.</p></details>
+      <details><summary>Wann wird bezahlt?</summary><p>Nach Lieferung der Unterlagen, per Rechnung. Eine Anzahlung vereinbaren wir nur bei größeren Objekten und dann ausdrücklich im Angebot.</p></details>
     </div>
   </div>
 </section>
@@ -613,7 +680,7 @@ figcaption strong{color:var(--teal);font-weight:600}
   <div class="wrap" style="max-width:760px;text-align:center">
     <div>
       <h2>Ein Portal, das Ihnen die Rückfragen erspart.</h2>
-      <p style="margin:16px auto 0;max-width:34em">Für Makler, Banken, Hausverwaltungen, Notare und Architekten. Einmal freigeschaltet – jeder Auftrag läuft mit Partnerpreisen.</p>
+      <p style="margin:16px auto 0;max-width:34em">Für Makler, Banken, Hausverwaltungen, Notare und Architekten. Einmal freigeschaltet – jeder Auftrag läuft mit Partnerpreisen und ohne Telefonschleife.</p>
       <div class="pbox" style="text-align:left;margin:28px auto 0;max-width:560px">
         <h3>So funktioniert es</h3>
         <ol>
@@ -647,7 +714,7 @@ figcaption strong{color:var(--teal);font-weight:600}
   <div class="wrap two" style="margin-top:56px">
     <div>
       <img src="img/objekte/kollegen_typo.jpg" alt="Denkt an uns bei Aufmaß, Schnitten und Details" style="width:100%;max-width:420px;height:auto">
-      <p style="margin-top:22px">Wir kommen selbst aus Architektur und Bau. Präzise und zügig, zum Festpreis – 2D und 3D, als DWG, PDF oder IFC.</p>
+      <p style="margin-top:22px">Wir kommen selbst aus Architektur und Bau. Präzise und zügig, zum Festpreis – 2D und 3D, als DWG, PDF oder IFC. Ihre Grundlage stimmt, bevor Sie zeichnen.</p>
       <div class="actions" style="margin-top:22px">
         <a class="btn solid" href="mailto:verwaltung@hege-nuernberg.de?subject=Aufma%C3%9F%20f%C3%BCr%20Architekturb%C3%BCro&body=Guten%20Tag%2C%0A%0Awir%20ben%C3%B6tigen%20ein%20Aufma%C3%9F%20f%C3%BCr%20folgendes%20Projekt%3A%0A%0AObjekt%20und%20Adresse%3A%20%0AGeschosse%3A%20%0AGew%C3%BCnschte%20Leistungen%20(Grundrisse%2C%20Schnitte%2C%20Ansichten%2C%20Details)%3A%20%0AAusgabeformat%20(DWG%2C%20PDF%2C%20IFC)%3A%20%0AWof%C3%BCr%20werden%20die%20Unterlagen%20gebraucht%20(Bauantrag%2C%20Umbau%2C%20Wertermittlung)%3A%20%0ATermin%20f%C3%BCr%20eine%20R%C3%BCcksprache%3A%20%0A%0AB%C3%BCro%3A%20%0AAnsprechpartner%3A%20%0ATelefon%3A%20%0A%0AMit%20freundlichen%20Gr%C3%BC%C3%9Fen%0A">Aufmaß beauftragen</a>
         <a class="btn" href="tel:+4991164377842">Rücksprache</a>
@@ -680,7 +747,7 @@ figcaption strong{color:var(--teal);font-weight:600}
   <div class="wrap">
     <div>
       <h2>Sagen Sie uns, was vermessen werden soll.</h2>
-      <p style="margin-top:14px">Objektart, ungefähre Größe, gewünschter Termin – mehr brauchen wir nicht. Sie bekommen ein Festpreisangebot, meist noch am selben Tag.</p>
+      <p style="margin-top:14px">Objektart, Größe, Wunschtermin. Ihr Festpreisangebot kommt am selben Tag.</p>
       <div class="actions" style="margin-top:22px">
         <a class="btn solid" href="mailto:verwaltung@hege-nuernberg.de?subject=Anfrage%20Aufma%C3%9F">E-Mail schreiben</a>
         <a class="btn" href="tel:+4991164377842">0911 643 778 42</a>
@@ -700,7 +767,7 @@ figcaption strong{color:var(--teal);font-weight:600}
 
 </main>
 <div class="mbar" aria-label="Schnellzugriff">
-  <a class="btn solid" href="#preise">Preis berechnen</a>
+  <a class="btn solid" href="#preise">Angebot anfordern</a>
   <a class="btn" href="tel:+4991164377842">Anrufen</a>
 </div>
 
@@ -721,28 +788,7 @@ figcaption strong{color:var(--teal);font-weight:600}
 </script>
 <script>
 (function(){
-  var P={woh_voll:735,woh_ohne:575,efh3:1305,efh_step:325,efh3_ohne:1135,efh_step_ohne:335,schnitt_efh:325,neben:105,mfh_grund:600,mfh_ne:600,mfh_grund_ohne:400,mfh_ne_ohne:445,schnitt_mfh:120,ansicht:235,lageplan:80,post:4.95,km:1.67,km_frei:20};
-  var f=document.getElementById('calc'); if(!f) return;
-  var fmt=function(n){var i=Math.abs(n-Math.round(n))<0.005;return n.toLocaleString('de-DE',{minimumFractionDigits:i?0:2,maximumFractionDigits:2})+' \u20ac'};
-  function calc(){
-    var d=new FormData(f), obj=d.get('obj'), lines=[], sum=0;
-    f.querySelectorAll('fieldset[data-for]').forEach(function(fs){fs.classList.toggle('on',fs.dataset.for.split(' ').indexOf(obj)>=0)});
-    if(obj==='woh'){ var v=d.get('wohpaket')==='voll'; var pr=v?P.woh_voll:P.woh_ohne; lines.push([v?'Wohnung: Aufma\u00df, Grundriss, Wohnfl\u00e4che':'Wohnung: Aufma\u00df und Wohnfl\u00e4che ohne Grundriss',pr]); sum+=pr; }
-    if(obj==='efh'){ var e=Math.max(1,Math.min(6,+d.get('etagen')||3)); var v=d.get('efhpaket')==='voll'; var pr=v?P.efh3+(e-3)*P.efh_step:P.efh3_ohne+(e-3)*P.efh_step_ohne; lines.push([v?'Einfamilienhaus, '+e+' Etagen: Aufma\u00df, Grundrisse, Wohnfl\u00e4che':'Einfamilienhaus, '+e+' Etagen: Aufma\u00df und Wohnfl\u00e4che ohne Grundrisse',pr]); sum+=pr;
-      if(d.get('schnitt_efh')){lines.push(['Geb\u00e4udeschnitt',P.schnitt_efh]);sum+=P.schnitt_efh;}
-      var n=Math.max(0,+d.get('neben')||0); if(n){lines.push([n+' Nebenanlage'+(n>1?'n':'')+' aufmessen',n*P.neben]);sum+=n*P.neben;} }
-    if(obj==='mfh'){ var ne=Math.max(2,+d.get('ne')||2); var v=d.get('mfhpaket')==='voll'; var pr=v?P.mfh_grund+ne*P.mfh_ne:P.mfh_grund_ohne+ne*P.mfh_ne_ohne; lines.push([(v?'Mehrfamilienhaus mit Grundrissen: Grundpreis + ':'Mehrfamilienhaus ohne Grundrisse: Grundpreis + ')+ne+' Einheit'+(ne>1?'en':''),pr]); sum+=pr;
-      if(d.get('schnitt_mfh')){lines.push(['Geb\u00e4udeschnitt, '+ne+' Einheiten',ne*P.schnitt_mfh]);sum+=ne*P.schnitt_mfh;} }
-    var a=obj==='woh'?0:Math.max(0,+d.get('ansichten')||0); if(obj!=='woh'&&d.get('kubatur')){lines.push(['Kubatur nach DIN 277',0,'auf Anfrage']);} if(a){lines.push([a+' Geb\u00e4udeansicht'+(a>1?'en':'')+' inkl. 3D-Nachbau',a*P.ansicht]);sum+=a*P.ansicht;}
-    if(obj!=='woh'&&d.get('lageplan')){lines.push(['Lageplan, unbeglaubigt',P.lageplan]);sum+=P.lageplan;}
-    var km=Math.max(0,+d.get('km')||0); if(km>P.km_frei){var an=Math.round(km*P.km*100)/100; lines.push(['Anfahrt '+km+' km \u00d7 1,99 \u20ac',an]);sum+=an;} else {lines.push(['Anfahrt bis 20 km',0]);}
-    if(d.get('post')){lines.push(['Unterlagen per Post',P.post]);sum+=P.post;}
-    document.getElementById('calc-sum').textContent=fmt(Math.round(sum*1.19*100)/100); document.getElementById('calc-netto').textContent=fmt(Math.round(sum*100)/100);
-    document.getElementById('calc-lines').innerHTML=lines.map(function(l){return '<li><span>'+l[0]+'</span><span>'+(l[2]||(l[1]?fmt(Math.round(l[1]*119)/100):'inklusive'))+'</span></li>'}).join('');
-    var body='Guten Tag,\n\nbitte senden Sie mir ein Angebot f\u00fcr:\n\n'+lines.map(function(l){return '- '+l[0]+': '+(l[2]||(l[1]?fmt(Math.round(l[1]*119)/100)+' inkl. USt.':'inklusive'))}).join('\n')+'\n\nSumme laut Preisrechner: '+fmt(Math.round(sum*100)/100)+' netto, '+fmt(Math.round(sum*1.19*100)/100)+' inkl. 19 % USt.\n\nObjektadresse: \nWunschtermin: \nTelefon: \n\nMit freundlichen Gr\u00fc\u00dfen\n';
-    document.getElementById('calc-mail').href='mailto:verwaltung@hege-nuernberg.de?subject='+encodeURIComponent('Angebot Aufma\u00df \u2013 '+fmt(Math.round(sum*1.19))+' brutto')+'&body='+encodeURIComponent(body);
-  }
-  f.addEventListener('input',calc); f.addEventListener('change',calc); calc();
+
 })();
 </script>
 <script>
@@ -764,13 +810,75 @@ figcaption strong{color:var(--teal);font-weight:600}
     sc.addEventListener('scroll',function(){requestAnimationFrame(upd)}); upd();
     items.forEach(function(it){ it.addEventListener('click',function(){ sc.scrollTo({left:it.offsetLeft-(sc.clientWidth-it.offsetWidth)/2,behavior:'smooth'}); }); });
     sc.scrollLeft=0; upd(); }
-  var els=document.querySelectorAll('.count'); if(!els.length) return;
-  var run=function(el){ var to=+el.dataset.to||0, t0=null, dur=1400;
-    if(matchMedia('(prefers-reduced-motion: reduce)').matches){el.textContent=to.toLocaleString('de-DE');return;}
-    function step(ts){ if(!t0)t0=ts; var p=Math.min(1,(ts-t0)/dur); var e=1-Math.pow(1-p,3); el.textContent=Math.round(to*e).toLocaleString('de-DE'); if(p<1)requestAnimationFrame(step); }
-    requestAnimationFrame(step); };
-  var io=new IntersectionObserver(function(en){en.forEach(function(x){if(x.isIntersecting){run(x.target);io.unobserve(x.target);}})},{threshold:.3});
-  els.forEach(function(e){io.observe(e)});
+
+  var reqF=document.getElementById('req'), reqOk=document.getElementById('req-ok'), btnSend=document.getElementById('req-send');
+  if(reqF&&btnSend){
+    btnSend.addEventListener('click',function(){
+      var d=new FormData(reqF);
+      var art=(d.get('obj')||'').trim(), objekt=(d.get('objekt')||'').trim(), name=(d.get('name')||'').trim(), tel=(d.get('tel')||'').trim();
+      var mail=(d.get('mail')||'').trim(), notiz=(d.get('notiz')||'').trim(), paket=(d.get('paket')||'').trim();
+      var bad=false;
+      if(!art){ var fs=reqF.querySelector('fieldset'); fs.classList.add('err'); bad=true; } 
+      [['objekt',objekt],['name',name],['tel',tel]].forEach(function(f){
+        var el=reqF.querySelector('[name='+f[0]+']'); if(!f[1]){ el.classList.add('err'); bad=true; } else el.classList.remove('err'); });
+      if(bad){ var e=reqF.querySelector('.err'); if(e&&e.focus) e.focus(); return; }
+      var det=[];
+      if(art==='Einfamilienhaus'){ det.push('Etagen: '+(d.get('etagen')||'')); var nb=+(d.get('neben')||0); if(nb) det.push('Nebenanlagen: '+nb); }
+      if(art==='Mehrfamilienhaus'){ det.push('Nutzungseinheiten: '+(d.get('ne')||'')); }
+      var zus=[];
+      if(d.get('schnitt')) zus.push('Gebäudeschnitt');
+      if(d.get('ansichten')) zus.push('Gebäudeansichten');
+      if(d.get('kubatur')) zus.push('Kubatur nach DIN 277');
+      if(d.get('lageplan')) zus.push('Lageplan, unbeglaubigt');
+      var body='Anfrage \u00fcber hege-nuernberg.de\n\n'
+        +'OBJEKT\n'+art+'\n'+objekt+'\n\n'
+        +'LEISTUNG\n'+paket+'\n'+(det.length?det.join('\n')+'\n':'')
+        +(zus.length?'\nZUS\u00c4TZLICH\n'+zus.join('\n')+'\n':'')
+        +'\nKONTAKT\n'+name+'\nTelefon: '+tel+'\n'+(mail?'E-Mail: '+mail+'\n':'')
+        +(notiz?'\nANMERKUNG\n'+notiz+'\n':'')
+        +'\nR\u00fcckruf zugesagt innerhalb von 24 Stunden.\n';
+      window.location.href='mailto:verwaltung@hege-nuernberg.de?subject='+encodeURIComponent('R\u00fcckruf \u2013 '+art+', '+objekt)+'&body='+encodeURIComponent(body);
+      setTimeout(function(){ reqF.classList.remove('on'); reqOk.classList.add('on'); },600);
+    });
+  }
+
+  if(reqF){
+    var pflicht=['objekt','name','tel'], fill=document.getElementById('prog-fill'), ptxt=document.getElementById('prog-txt'), prog=document.querySelector('.prog');
+    function upd(){
+      var art=(reqF.querySelector('[name=obj]:checked')||{}).value||'';
+      reqF.classList.toggle('ready', !!art);
+      reqF.querySelectorAll('fieldset[data-for]').forEach(function(fs){ fs.classList.toggle('on', !!art && fs.dataset.for.split(' ').indexOf(art)>=0); });
+      var n=art?1:0;
+      pflicht.forEach(function(k){
+        var el=reqF.querySelector('[name='+k+']'), lab=el.closest('label'), v=(el.value||'').trim();
+        if(v){ n++; el.classList.add('filled'); if(lab) lab.classList.add('filled'); el.classList.remove('err'); }
+        else { el.classList.remove('filled'); if(lab) lab.classList.remove('filled'); }
+      });
+      var total=pflicht.length+1;
+      fill.style.width=(n/total*100)+'%';
+      ptxt.textContent = n===total ? 'Bereit zum Senden' : ('Noch '+(total-n)+' '+(total-n===1?'Angabe':'Angaben'));
+      prog.classList.toggle('done', n===total);
+      btnSend.classList.toggle('ready', n===total);
+    }
+    reqF.addEventListener('input',upd); reqF.addEventListener('change',upd); upd();
+  }
+  var els=document.querySelectorAll('.count');
+  if(els.length){
+    els.forEach(function(el){
+      var start=+el.dataset.start||0, per=+el.dataset.perWeek||0, from=el.dataset.from;
+      if(from&&per){
+        var wochen=Math.max(0,Math.floor((Date.now()-new Date(from+'T00:00:00').getTime())/(7*864e5)));
+        el.dataset.to=start+wochen*per;
+      }
+      el.textContent=(+el.dataset.to||start).toLocaleString('de-DE');
+    });
+    var run=function(el){ var to=+el.dataset.to||0, t0=null, dur=1400;
+      if(matchMedia('(prefers-reduced-motion: reduce)').matches){el.textContent=to.toLocaleString('de-DE');return;}
+      function step(ts){ if(!t0)t0=ts; var pr=Math.min(1,(ts-t0)/dur); var e=1-Math.pow(1-pr,3); el.textContent=Math.round(to*e).toLocaleString('de-DE'); if(pr<1)requestAnimationFrame(step); }
+      requestAnimationFrame(step); };
+    var io=new IntersectionObserver(function(en){en.forEach(function(x){if(x.isIntersecting){run(x.target);io.unobserve(x.target);}})},{threshold:.3});
+    els.forEach(function(e){io.observe(e)});
+  }
 })();
 </script>
 

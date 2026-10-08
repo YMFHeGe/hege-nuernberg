@@ -45,7 +45,11 @@ nav a{text-decoration:none;color:var(--grey);padding:6px 0;border-bottom:.5px so
 nav a:hover,nav a:focus-visible{color:var(--ink);border-bottom-color:var(--teal)}
 .call{text-decoration:none;font-size:15px;border:.5px solid var(--ink);padding:9px 16px;white-space:nowrap}
 .call:hover{background:var(--ink);color:#fff}
-.menu-btn{display:none;background:none;border:.5px solid var(--ink);padding:8px 12px;font:inherit;font-size:14px;cursor:pointer}
+.menu-btn{display:none;background:none;border:0;padding:10px;cursor:pointer}
+.menu-btn span{display:block;width:22px;height:1.5px;background:var(--ink);margin:5px auto;transition:transform .25s,opacity .25s}
+.menu-btn[aria-expanded="true"] span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+.menu-btn[aria-expanded="true"] span:nth-child(2){opacity:0}
+.menu-btn[aria-expanded="true"] span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
 
 /* calculator */
 .calc{margin-top:22px}
@@ -114,7 +118,12 @@ nav a:hover,nav a:focus-visible{color:var(--ink);border-bottom-color:var(--teal)
 .calc-lines{list-style:none;margin:0 0 24px;padding:0;font-size:14px;color:var(--grey)}
 .calc-lines li{display:flex;justify-content:space-between;gap:12px;padding:7px 0;border-top:.5px solid var(--line)}
 .calc-lines li span:last-child{white-space:nowrap}
-@media (max-width:900px){.calc-out{position:static}.calc-sum{font-size:52px}}
+@media (max-width:900px){
+  .bar2{grid-template-columns:1fr;justify-items:center;row-gap:0;padding:14px 24px 0}
+  .bar2 .call{display:none}
+  .bar2 .menu-btn{justify-self:center;margin-top:2px}
+  nav#nav{top:auto}
+.calc-out{position:static}.calc-sum{font-size:52px}}
 /* hero: präziser Eingang, eine orchestrierte Bewegung */
 .hero{position:relative;overflow:hidden}
 .stage{position:absolute;top:0;bottom:0;right:0;width:52%;pointer-events:none;
@@ -280,8 +289,8 @@ header{position:sticky;top:0;background:#fff;border-bottom:.5px solid var(--line
 .bar2 .call:hover{background:none;color:var(--ink)}
 .bar2 .menu-btn{justify-self:end}
 .nav2{display:flex;justify-content:center;gap:34px;padding:10px 24px 14px;font-size:11px;letter-spacing:.22em;text-transform:uppercase}
-.nav2 a{color:var(--grey);text-decoration:none;padding:4px 0}
-.nav2 a.active,.nav2 a:hover{color:var(--ink)}
+.nav2 a{color:var(--grey);text-decoration:none;padding:4px 0;border-bottom:1.5px solid transparent;transition:color .2s,border-color .2s}
+.nav2 a.active,.nav2 a:hover{color:var(--ink);border-bottom-color:var(--teal)}
 /* cover */
 .cover{background:#fff}
 .cover img{width:100%;max-height:82vh;object-fit:cover;object-position:center;display:block}
@@ -346,6 +355,7 @@ nav a:hover{border-bottom-color:transparent}
 .rev cite{font-style:normal;color:var(--grey);font-size:13px}
 .logo-track img{height:26px;width:auto;filter:grayscale(1);opacity:.75}
 .logo-track{gap:72px;padding:26px 0}
+@media (max-width:900px){.marquee .logo-track{animation-duration:20s}}
 @media (prefers-reduced-motion:reduce){.marquee .track{animation:none;flex-wrap:wrap;width:auto;justify-content:center}}
 /* bunt: Privatkunden */
 .privat{background:linear-gradient(180deg,#EAF4F3 0%,#fff 100%);border-top:.5px solid var(--line)}
@@ -419,8 +429,33 @@ figcaption strong{color:var(--teal);font-weight:600}
 @media (max-width:900px){
   .mbar{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:40;gap:10px;padding:10px 14px calc(10px + env(safe-area-inset-bottom));background:rgba(255,255,255,.96);border-top:.5px solid var(--line);backdrop-filter:blur(6px)}
   .mbar .btn{flex:1;text-align:center;padding:13px 10px;font-size:15px}
+  .mbar .mb-teal{background:var(--teal);border-color:var(--teal);color:#fff}
   footer .wrap{padding-bottom:90px}
 }
+
+/* Augenmaß – verstecktes Spiel */
+.eye{position:fixed;inset:0;z-index:200;background:rgba(255,255,255,.97);display:none;align-items:center;justify-content:center;padding:24px}
+.eye.on{display:flex;animation:unfold .35s cubic-bezier(.2,.8,.3,1)}
+.eye-box{width:100%;max-width:560px;text-align:center}
+.eye h3{font-family:"Clear Sans Thin",sans-serif;font-weight:200;font-size:30px;margin:0 0 4px}
+.eye .k{font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--teal);margin-bottom:14px}
+.eye svg{width:100%;max-width:420px;margin:10px auto 6px;display:block}
+.eye .in{display:flex;gap:10px;justify-content:center;margin-top:14px}
+.eye input{width:130px;padding:11px 12px;border:.5px solid var(--line);font:inherit;font-size:17px;text-align:right}
+.eye input:focus{outline:none;border-color:var(--teal)}
+.eye button{border:0;background:var(--ink);color:#fff;font:inherit;font-size:15px;padding:11px 22px;cursor:pointer}
+.eye .fb{min-height:46px;margin-top:14px;font-size:15px}
+.eye .fb b{display:block;font-size:22px;font-family:"Clear Sans Thin",sans-serif;font-weight:200;margin-bottom:2px}
+.eye .runde{font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--grey);margin-top:18px}
+.eye .close{position:absolute;top:22px;right:26px;background:none;color:var(--grey);font-size:26px;line-height:1;padding:6px 10px}
+.eye .hintline{font-size:13px;color:var(--grey);margin-top:6px}
+
+@media (max-width:900px){
+  .bar2{grid-template-columns:1fr;justify-items:center;padding:14px 24px 0}
+  .bar2 .call{display:none}
+  .bar2 .menu-btn{justify-self:center;margin-top:2px}
+}
+#scrollbar{position:fixed;top:0;left:0;height:2.5px;width:0;background:var(--teal);z-index:60}
 </style>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"ProfessionalService","@id":"https://www.hege-nuernberg.de/#hege","name":"HeGe Vermessung & WEG","alternateName":"HeGe Nürnberg","url":"https://www.hege-nuernberg.de/","telephone":"+49 911 64377842","email":"verwaltung@hege-nuernberg.de","founder":{"@type":"Person","name":"Elias Athanasios Roth"},"address":{"@type":"PostalAddress","streetAddress":"Würzburger Straße 4","postalCode":"90762","addressLocality":"Fürth","addressRegion":"Bayern","addressCountry":"DE"},"areaServed":[{"@type":"City","name":"Fürth"},{"@type":"City","name":"Nürnberg"},{"@type":"City","name":"Erlangen"}],"openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday"],"opens":"09:00","closes":"18:00"},{"@type":"OpeningHoursSpecification","dayOfWeek":"Friday","opens":"09:00","closes":"14:00"}],"description":"Aufmaß per Laserscan, Grundrisse im CAD, Wohn- und Nutzflächen nach WoFlV und DIN 277, Kubatur, Aufteilungspläne und Abgeschlossenheitsbescheinigung nach WEG. Festpreis, Architektenstempel, Lieferung in 8 Werktagen. Großraum Nürnberg, Fürth, Erlangen.","hasOfferCatalog":{"@type":"OfferCatalog","name":"Leistungen","itemListElement":[{"@type":"Offer","itemOffered":{"@type":"Service","name":"Aufmaß und Grundriss einer Eigentumswohnung"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Wohnflächenberechnung nach WoFlV"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Aufteilungsplan und Abgeschlossenheitsbescheinigung nach § 7 WEG"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Bestandspläne, Schnitte und Ansichten für Architekten"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"Kubatur nach DIN 277"}}]}}
@@ -431,12 +466,13 @@ figcaption strong{color:var(--teal);font-weight:600}
 </head>
 <body>
 
+<div id="scrollbar" aria-hidden="true"></div>
 <header>
   <div class="progress" aria-hidden="true"></div>
   <div class="bar2">
     <span></span>
     <a class="brand2" href="#top"><span class="thin">HeGe</span><small>VERMESSUNG &amp; WEG</small></a>
-    <button class="menu-btn" aria-expanded="false" aria-controls="nav">Menü</button>
+    <button class="menu-btn" aria-expanded="false" aria-controls="nav" aria-label="Menü"><span></span><span></span><span></span></button>
   </div>
   <nav id="nav" class="nav2">
     <a href="#vermessung">Vermessung</a>
@@ -454,14 +490,14 @@ figcaption strong{color:var(--teal);font-weight:600}
 <section class="cover" id="top">
   <picture>
     <source media="(max-width:900px)" srcset="img/cover_1200.jpg">
-    <img src="img/cover.jpg" alt="HeGe Vermessung Fürth: vom Bestandsgebäude über die Laserscan-Punktwolke zum fertigen CAD-Grundriss" fetchpriority="high">
+    <img src="img/cover_2800.jpg" srcset="img/cover_1200.jpg 1200w, img/cover.jpg 1672w, img/cover_2800.jpg 2800w" sizes="100vw" alt="HeGe Vermessung Fürth: vom Bestandsgebäude über die Laserscan-Punktwolke zum fertigen CAD-Grundriss" fetchpriority="high">
   </picture>
   <div class="cover-text">
     <p class="pre" style="text-align:center">Vermessung &middot; Unterlagen &middot; WEG</p>
     <h1>Wir messen auf – damit jeder Zentimeter passt.</h1>
     <p class="lede">Aufmaß, Grundrisse und Wohnflächen nach WoFlV für Bestandsimmobilien im Großraum Nürnberg, Fürth und Erlangen. <strong>Unsere Unterlagen gehen bei der Bank durch</strong> – Mit Architektenstempel, in 8 Werktagen, zum Festpreis.</p>
     <div class="actions" style="justify-content:center;gap:16px">
-      <a class="btn solid" href="#preise" style="font-size:17px;padding:16px 28px">Was kostet mein Gebäude?</a>
+      <a class="btn solid" href="#preise" style="font-size:17px;padding:16px 28px;background:var(--teal);border-color:var(--teal)">Was kostet mein Gebäude?</a>
       <a class="btn" href="#partner" style="font-size:17px;padding:16px 28px">HeGe Partner werden</a>
     </div>
   </div>
@@ -770,9 +806,25 @@ figcaption strong{color:var(--teal);font-weight:600}
 <div class="closing" aria-hidden="true"></div>
 
 </main>
+
+<div class="eye" id="eye" role="dialog" aria-label="Augenmaß">
+  <button class="close" id="eye-x" aria-label="Schließen">&times;</button>
+  <div class="eye-box">
+    <div class="k">Augenma&szlig;</div>
+    <h3 id="eye-h">Wie gro&szlig; ist dieser Raum?</h3>
+    <p class="hintline">Sch&auml;tzen Sie die Fl&auml;che. Der Ma&szlig;stab steht darunter.</p>
+    <svg id="eye-svg" viewBox="0 0 400 260" aria-hidden="true"></svg>
+    <div class="in">
+      <input type="number" id="eye-in" step="0.1" min="0" placeholder="m&sup2;" inputmode="decimal">
+      <button id="eye-go">Pr&uuml;fen</button>
+    </div>
+    <div class="fb" id="eye-fb"></div>
+    <div class="runde" id="eye-r">Runde 1 von 5</div>
+  </div>
+</div>
+
 <div class="mbar" aria-label="Schnellzugriff">
-  <a class="btn solid" href="#preise">Angebot anfordern</a>
-  <a class="btn" href="tel:+4991164377842">Anrufen</a>
+  <a class="btn mb-teal" href="tel:+4991164377842">Anrufen</a>
 </div>
 
 
@@ -866,6 +918,13 @@ figcaption strong{color:var(--teal);font-weight:600}
     }
     reqF.addEventListener('input',upd); reqF.addEventListener('change',upd); upd();
   }
+
+  var sb=document.getElementById('scrollbar');
+  if(sb){ var tick=false;
+    function sbu(){ var d=document.documentElement, m=d.scrollHeight-d.clientHeight;
+      sb.style.width=(m>0?(d.scrollTop/m*100):0)+'%'; tick=false; }
+    addEventListener('scroll',function(){ if(!tick){ tick=true; requestAnimationFrame(sbu); }},{passive:true}); sbu();
+  }
   var els=document.querySelectorAll('.count');
   if(els.length){
     els.forEach(function(el){
@@ -886,5 +945,71 @@ figcaption strong{color:var(--teal);font-weight:600}
 })();
 </script>
 
+
+<script>
+(function(){
+  var eye=document.getElementById('eye'); if(!eye) return;
+  var svg=document.getElementById('eye-svg'), inp=document.getElementById('eye-in'), go=document.getElementById('eye-go'),
+      fb=document.getElementById('eye-fb'), rd=document.getElementById('eye-r'), h=document.getElementById('eye-h');
+  var runde=0, MAX=5, abw=[], soll=0, warte=false;
+  function raum(){
+    var b=+(3+Math.random()*7).toFixed(1), t=+(2.5+Math.random()*6).toFixed(1);
+    var form=Math.random()<.35;
+    var fl=b*t, nb=0, nt=0;
+    if(form){ nb=+(b*(.25+Math.random()*.3)).toFixed(1); nt=+(t*(.25+Math.random()*.3)).toFixed(1); fl-=nb*nt; }
+    soll=+fl.toFixed(2);
+    var W=320, H=200, s=Math.min(W/b, H/t), w=b*s, hh=t*s, x=(400-w)/2, y=(230-hh)/2;
+    var pts;
+    if(form){ var cw=nb*s, ch=nt*s;
+      pts=[[x,y],[x+w,y],[x+w,y+hh-ch],[x+w-cw,y+hh-ch],[x+w-cw,y+hh],[x,y+hh]];
+    } else pts=[[x,y],[x+w,y],[x+w,y+hh],[x,y+hh]];
+    var d=pts.map(function(p,i){return (i?'L':'M')+p[0].toFixed(1)+' '+p[1].toFixed(1)}).join(' ')+' Z';
+    var ms=1*s;
+    svg.innerHTML='<path d="'+d+'" fill="#F4F4F3" stroke="#1D1D1B" stroke-width="3" stroke-linejoin="round"/>'
+      +'<g stroke="#53AAA8" stroke-width="2"><line x1="'+x+'" y1="245" x2="'+(x+ms)+'" y2="245"/>'
+      +'<line x1="'+x+'" y1="241" x2="'+x+'" y2="249"/><line x1="'+(x+ms)+'" y1="241" x2="'+(x+ms)+'" y2="249"/></g>'
+      +'<text x="'+(x+ms+8)+'" y="249" font-family="Inter,sans-serif" font-size="12" fill="#808081">1 m</text>';
+    inp.value=''; inp.focus();
+  }
+  function start(){ runde=0; abw=[]; warte=false; h.textContent='Wie groß ist dieser Raum?'; fb.textContent=''; next(); }
+  function next(){ runde++; rd.textContent='Runde '+runde+' von '+MAX; go.textContent='Prüfen'; raum(); }
+  function ende(){
+    var m=abw.reduce(function(a,b){return a+b},0)/abw.length;
+    h.textContent='Ihr Augenmaß: ± '+m.toFixed(1).replace('.',',')+' %';
+    svg.innerHTML='';
+    fb.innerHTML='<b>'+(m<5?'Beachtlich.':m<12?'Solide.':'Ausbaufähig.')+'</b>Unser Scanner misst auf 2 mm genau. Deshalb schätzen wir nicht.';
+    rd.innerHTML='<a href="#preise" id="eye-cta" style="color:var(--teal);text-decoration:none;border-bottom:1px solid var(--teal);letter-spacing:.2em">Echtes Aufmaß anfragen</a>';
+    rd.textContent=''; go.textContent='Noch einmal'; warte=true;
+  }
+  go.addEventListener('click',function(){
+    if(warte){ warte=false; start(); return; }
+    var v=parseFloat((inp.value||'').replace(',','.'));
+    if(!(v>0)){ inp.focus(); return; }
+    var d=Math.abs(v-soll)/soll*100; abw.push(d);
+    fb.innerHTML='<b>'+soll.toFixed(2).replace('.',',')+' m²</b>Ihre Schätzung lag '+d.toFixed(1).replace('.',',')+' % daneben.';
+    if(runde>=MAX){ setTimeout(ende,1200); warte=true; }
+    else setTimeout(next,1200);
+  });
+  inp.addEventListener('keydown',function(e){ if(e.key==='Enter') go.click(); });
+  function auf(){ eye.classList.add('on'); start(); }
+  function zu(){ eye.classList.remove('on'); }
+  document.getElementById('eye-x').addEventListener('click',zu);
+  eye.addEventListener('click',function(e){ if(e.target===eye) zu(); if(e.target.id==='eye-cta') zu(); });
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape') zu(); });
+  // Auslöser 1: fünfmal auf die Wortmarke im Kopf
+  var brand=document.querySelector('.brand2'), c=0, t0=0;
+  if(brand) brand.addEventListener('click',function(e){
+    var now=Date.now(); c = (now-t0<900)? c+1 : 1; t0=now;
+    if(c>=5){ e.preventDefault(); c=0; auf(); }
+  });
+  // Auslöser 2: "aufmass" tippen
+  var buf='';
+  document.addEventListener('keydown',function(e){
+    if(e.target.matches('input,textarea,select')) return;
+    buf=(buf+e.key.toLowerCase()).slice(-7);
+    if(buf==='aufmass') auf();
+  });
+})();
+</script>
 </body>
 </html>
